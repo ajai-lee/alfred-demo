@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Everyday Companion (Alfred) — Swiggy Builders Club Demo</title>
+  <meta name="description" content="Official 96-second product walkthrough of Everyday Companion (Alfred) built on Swiggy Food, Instamart, Dineout, and Scenes MCP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090C16;
+      --card-bg: #121727;
+      --card-border: #1E2742;
+      --text-main: #F4EFE6;
+      --text-muted: #8E98B0;
+      --accent: #FF5200;
+      --accent-gold: #F5B544;
+      --pill-bg: #192138;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .header {
+      text-align: center;
+      max-width: 780px;
+      margin-bottom: 28px;
+    }
+    .badge-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--pill-bg);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: var(--accent-gold);
+    }
+    .badge.swiggy {
+      background: rgba(255, 82, 0, 0.12);
+      border-color: rgba(255, 82, 0, 0.35);
+      color: var(--accent);
+    }
+    h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      color: #FFF;
+    }
+    p.subtitle {
+      font-size: clamp(15px, 2vw, 17px);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .player-wrap {
+      width: 100%;
+      max-width: 640px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      background: #000;
+      aspect-ratio: 4 / 5;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+    .player-meta {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--card-border);
+      background: #0E1322;
+      flex-wrap: wrap;
+    }
+    .meta-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .meta-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFF;
+    }
+    .meta-spec {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #FFF;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 999px;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .action-btn:hover {
+      background: #e64900;
+      transform: translateY(-1px);
+    }
+    .chapters-card {
+      width: 100%;
+      max-width: 640px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 22px 24px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+    }
+    .chapters-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+      margin-bottom: 14px;
+    }
+    .chapters-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .chapter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      color: var(--text-main);
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .chapter-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--card-border);
+      color: #FFF;
+    }
+    .chapter-time {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      color: var(--accent-gold);
+      font-weight: 600;
+      background: rgba(245, 181, 68, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .footer a {
+      color: var(--text-main);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="badge-bar">
+      <span class="badge swiggy">Swiggy Builders Club 2026</span>
+      <span class="badge">Developer Track</span>
+      <span class="badge">Everyday Companion</span>
+    </div>
+    <h1>Alfred: Product Walkthrough</h1>
+    <p class="subtitle">Autonomous day orchestration across Swiggy Food, Instamart, Dineout, and Scenes MCP.</p>
+  </div>
+
+  <div class="player-wrap">
+    <div class="video-container">
+      <video id="player" controls playsinline preload="auto" poster="poster.jpg">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="player-meta">
+      <div class="meta-details">
+        <div class="meta-title">Everyday Companion — Master Cut</div>
+        <div class="meta-spec">1080×1350 • 96s • Flutter + Swiggy MCP</div>
+      </div>
+      <a href="video.mp4" download="alfred-promo-product-walkthrough-96s.mp4" class="action-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Download MP4
+      </a>
+    </div>
+  </div>
+
+  <div class="chapters-card">
+    <div class="chapters-title">Jump to Integration / Chapter</div>
+    <ul class="chapters-list">
+      <li class="chapter-item" onclick="seek(0)">
+        <span>The Problem & Intentions Gap</span>
+        <span class="chapter-time">0:00</span>
+      </li>
+      <li class="chapter-item" onclick="seek(17)">
+        <span>Morning Breakfast Order — <strong>Swiggy Food</strong></span>
+        <span class="chapter-time">0:17</span>
+      </li>
+      <li class="chapter-item" onclick="seek(27)">
+        <span>Alfred Gotchi — Physical Desk Companion</span>
+        <span class="chapter-time">0:27</span>
+      </li>
+      <li class="chapter-item" onclick="seek(34)">
+        <span>Calendar Sync & Day Arc Routine</span>
+        <span class="chapter-time">0:34</span>
+      </li>
+      <li class="chapter-item" onclick="seek(45)">
+        <span>Nutrition Engine & Weekly Meal Plan</span>
+        <span class="chapter-time">0:45</span>
+      </li>
+      <li class="chapter-item" onclick="seek(55)">
+        <span>Kitchen Pantry Check & Groceries — <strong>Swiggy Instamart</strong></span>
+        <span class="chapter-time">0:55</span>
+      </li>
+      <li class="chapter-item" onclick="seek(67)">
+        <span>Live Events & Standup Tickets — <strong>Swiggy Scenes</strong></span>
+        <span class="chapter-time">1:07</span>
+      </li>
+      <li class="chapter-item" onclick="seek(76)">
+        <span>Dinner Table Reservations — <strong>Swiggy Dineout</strong></span>
+        <span class="chapter-time">1:16</span>
+      </li>
+      <li class="chapter-item" onclick="seek(86)">
+        <span>Confirmation Policy & Trust Architecture</span>
+        <span class="chapter-time">1:26</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <p>Submitted by <strong>Ratelo Technologies Private Limited (Ratelo Labs)</strong></p>
+    <p>Product: <a href="https://alfred.ratelolabs.com/" target="_blank">alfred.ratelolabs.com</a> • Support: <a href="mailto:support@ratelolabs.com">support@ratelolabs.com</a></p>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    function seek(seconds) {
+      player.currentTime = seconds;
+      player.play();
+      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  </script>
+</body>
+</html>
